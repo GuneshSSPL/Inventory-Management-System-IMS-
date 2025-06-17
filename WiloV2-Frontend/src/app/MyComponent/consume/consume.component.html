@@ -1,0 +1,66 @@
+<div class="consume-container">
+  <h2>Material Consumption</h2>
+
+  <div class="form-group">
+    <label>Material Code</label>
+    <div class="input-group">
+      <select
+      [(ngModel)]="selectedMaterialCode"
+      (change)="onMaterialSelect()"
+      class="form-control">
+      <option value="">-- Select Material --</option>
+      <option *ngFor="let mat of materials" [value]="mat.MaterialCode">
+        {{ mat.MaterialCode }}
+      </option>
+    </select>
+
+      <input
+        type="text"
+        [(ngModel)]="selectedMaterialCode"
+        (blur)="fetchMaterialDetails()"
+        placeholder="Or enter code manually"
+        class="form-control"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="materialDetails.availableQty" class="material-info">
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" [value]="materialDetails.description" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>UOM</label>
+      <input type="text" [value]="materialDetails.uom" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Available Quantity</label>
+      <input type="number" [value]="materialDetails.availableQty" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Quantity to Consume</label>
+      <input
+        type="number"
+        [(ngModel)]="materialDetails.quantity"
+        min="1"
+        max="{{ materialDetails.availableQty }}"
+        class="form-control"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Remaining Quantity</label>
+      <input type="number" [value]="remainingQty" readonly>
+    </div>
+  </div>
+
+  <button
+    class="consume-btn"
+    (click)="consumeMaterial()"
+    [disabled]="!selectedMaterialCode || !materialDetails.quantity">
+    Consume Material
+  </button>
+</div>

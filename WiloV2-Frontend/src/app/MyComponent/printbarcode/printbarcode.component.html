@@ -1,0 +1,83 @@
+<div class="form-container">
+  <form #materialForm="ngForm" (ngSubmit)="generateBarcode()">
+    <div class="form-group">
+      <label>Material Code*</label>
+      <input type="text" [(ngModel)]="MaterialCode" name="MaterialCode" required>
+      <small *ngIf="!MaterialCode && materialForm.submitted">Required</small>
+    </div>
+
+    <div class="form-group">
+      <label>Description*</label>
+      <input type="text" [(ngModel)]="Description" name="Description" required>
+      <small *ngIf="!Description && materialForm.submitted">Required</small>
+    </div>
+
+    <div class="form-group">
+     
+    </div>
+
+    <div class="form-group dropdown"> 
+      <label>Category*</label> <!-- Changed label from Category ID -->
+      <select [(ngModel)]="CategoryID" name="CategoryID" required>
+        <option [ngValue]="null" disabled>Select a Category</option>
+        <option *ngFor="let category of categories" [value]="category.CategoryID">
+          {{ category.CategoryName }}
+        </option>
+      </select>
+      <small *ngIf="!CategoryID && materialForm.submitted">Required</small>
+      
+      <label>Supplier*</label>
+      <select [(ngModel)]="SupplierID" name="SupplierID">
+        <option [ngValue]="null" disabled>Select a Supplier</option>
+        <option *ngFor="let supplier of suppliers" [value]="supplier.SupplierID">
+          {{ supplier.SupplierName }}
+        </option>
+          <small *ngIf="!SupplierID && materialForm.submitted">Required</small>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Current Quantity*</label>
+      <input type="number" [(ngModel)]="CurrentQuantity" name="CurrentQuantity" required>
+      <small *ngIf="!CurrentQuantity && materialForm.submitted">Required</small>
+    </div>
+
+    <div class="form-group">
+      <label>Unit of Measure</label>
+      <input type="text" [(ngModel)]="UOM" name="UOM">
+    </div>
+
+    <div class="form-group">
+      <label>Unit Price</label>
+      <input type="number" [(ngModel)]="UnitPrice" name="UnitPrice" step="0.01">
+    </div>
+
+    <div class="form-group"> <!-- Added Reorder Level input -->
+      <label>Reorder Level</label>
+      <input type="number" [(ngModel)]="ReorderLevel" name="ReorderLevel">
+      <!-- Add validation message if ReorderLevel becomes required -->
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Processing...' : 'Create Material' }}
+      </button>
+      <button type="button" (click)="printBarcode()" [disabled]="!generatedBarcode">
+        Print Barcode
+      </button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+  </form>
+
+  <div *ngIf="generatedBarcode" class="barcode-preview">
+    <h3>Generated Barcode:</h3>
+    <img [src]="generatedBarcode" alt="Material Barcode">
+  </div>
+</div>

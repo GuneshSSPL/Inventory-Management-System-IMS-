@@ -1,0 +1,99 @@
+<ng-template #unauthorizedContentMaster>
+  <div class="unauthorized-message">
+    <p>You do not have permission to access the Role Master.</p>
+  </div>
+</ng-template>
+
+<div *appHasPermission="['role-manage', 'read_role', 'update_role', 'delete_role', 'create_role', 'read_permission', 'update_permission', 'delete_permission', 'create_permission', 'assign_permission_to_role', 'remove_permission_from_role']; op 'OR'; else unauthorizedContentMaster">
+  <div class="role-master-container">
+    
+  <h2>Role Master - User Role and Permission Management</h2>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <p>Loading data...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="successMessage" class="success-message">
+    <p>{{ successMessage }}</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="form-section">
+    <div class="form-group">
+      <label for="user-select-master">Select User:</label>
+      <select id="user-select-master" [(ngModel)]="selectedUserId" name="selectedUserMaster" (ngModelChange)="onUserSelect()">
+        <option [ngValue]="null" disabled>-- Select a User --</option>
+        <option *ngFor="let user of users" [value]="user.UserID">
+           {{ user.Username || user.Email }} (Current Role: {{ user.RoleName || getRoleName(user.RoleID) || 'N/A' }})
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="selectedUserId !== null && !showRoleChangeSection && !showPermissionChangeSection" class="action-buttons">
+        <button (click)="openRoleChange()" class="action-button">Change Role</button>
+        <button (click)="openPermissionChange()" class="action-button">Change Permissions for Role</button>
+    </div>
+
+    <div *ngIf="showRoleChangeSection" class="change-section">
+        <h4>Change Role for {{ getSelectedUserName() }}</h4>
+        <div class="form-group">
+            <label for="role-select-change">New Role:</label>
+            <select id="role-select-change" [(ngModel)]="newSelectedRoleId" name="newSelectedRole">
+                <option [ngValue]="null" disabled>-- Select New Role --</option>
+                <option *ngFor="let role of roles" [value]="role.RoleID">
+                    {{ role.RoleName }}
+                </option>
+            </select>
+        </div>
+        <button (click)="confirmRoleChange()" [disabled]="newSelectedRoleId === null" class="confirm-button">Confirm Role Change</button>
+        <button (click)="resetUIState()" class="cancel-button">Cancel</button>
+    </div>
+
+    <div *ngIf="showPermissionChangeSection" class="change-section">
+        <h4>Manage Permissions for Role: {{ getRoleName(selectedRoleIdForPermission) }}</h4>
+        
+        <div *ngIf="loadingPermissions">
+            <p>Loading permissions...</p>
+        </div>
+
+        <div *ngIf="!loadingPermissions && selectedRoleIdForPermission !== null && permissions.length > 0" class="permissions-list">
+            <div *ngFor="let permission of permissions" class="permission-item">
+                <input
+                  type="checkbox"
+                  [id]="'perm-change-' + permission.PermissionID"
+                  [checked]="isPermissionStaged(permission.PermissionID)" 
+                  (change)="togglePermission(permission.PermissionID)"
+                  [disabled]="isLoading" 
+                />
+                <label [for]="'perm-change-' + permission.PermissionID">{{ permission.PermissionName }}</label>
+            </div>
+        </div>
+
+        <div *ngIf="!loadingPermissions && selectedRoleIdForPermission !== null && permissions.length === 0" class="info-message">
+            <p>No permissions available to be assigned.</p>
+        </div>
+        <button (click)="confirmPermissionChange()" [disabled]="selectedRoleIdForPermission === null || Object.keys(permissionsToUpdate).length === 0" class="confirm-button">Save Permissions</button>
+        <button (click)="resetUIState()" class="cancel-button">Cancel</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="displayRoleConfirmDialog" class="confirmation-dialog">
+    <p>Are you sure you want to change the role for {{ getSelectedUserName() }} to {{ getNewRoleName() }}?</p>
+    <button (click)="executeRoleChange()" class="confirm-button">Yes, Change Role</button>
+    <button (click)="cancelRoleChangeConfirmation()" class="cancel-button">No, Cancel</button>
+  </div>
+
+  <div *ngIf="displayPermissionConfirmDialog" class="confirmation-dialog">
+    <p>Are you sure you want to save these permission changes for role {{ getRoleName(selectedRoleIdForPermission) }}?</p>
+    <button (click)="executePermissionChange()" class="confirm-button">Yes, Save Permissions</button>
+    <button (click)="cancelPermissionSaveConfirmation()" class="cancel-button">No, Cancel</button>
+  </div>
+
+  <div *ngIf="!isLoading && users.length === 0" class="info-message">
+    <p>No users found.</p>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="sidebar" *ngIf="isAuthenticated() && (authService.hasPermission('view_material_table') || authService.hasPermission('record_consumption') || authService.hasPermission('print_barcode') || authService.hasPermission('view_reports') || authService.hasPermission('view_workspace') || authService.hasPermission('manage_rolemaster') || authService.hasPermission('admin_access') || authService.hasRole('Admin') || authService.hasPermission('view_suppliers'))">
+
+    <div class="tabs" *ngIf="authService.hasPermission('view_dashboard') || authService.hasRole('Admin')"><a [routerLink]="['/material-table']" routerLinkActive="active">Material-Table</a></div>
+    <div class="tabs" *ngIf="authService.hasPermission('record_consumption') || authService.hasRole('Admin')"><a [routerLink]="['/consume']" routerLinkActive="active">Consume</a></div>
+    <div class="tabs" *ngIf="authService.hasPermission('view_reports') || authService.hasRole('Admin')"><a [routerLink]="['/reports']" routerLinkActive="active">Reports</a></div>
+    <div class="tabs" *ngIf="authService.hasPermission('print_barcode') || authService.hasRole('Admin')"><a [routerLink]="['printbarcode']" routerLinkActive="active">Print Barcode</a></div>
+    <!-- <div class="tabs" *ngIf="authService.hasPermission('role-manage') || authService.hasPermission('assign_user_to_role')"> -->
+        <!-- <a [routerLink]="['/admin/user-roles']" routerLinkActive="active">UserMaster</a> -->
+    <!-- </div> -->
+    <!-- New link for Role Master -->
+    <div class="tabs" *ngIf="authService.hasPermission('view_workspace') || authService.hasRole('Admin')"><a [routerLink]="['/workspace']" routerLinkActive="active">Workspace</a></div>
+    <div class="tabs" *ngIf="authService.hasPermission('manage_rolemaster') || authService.hasPermission('admin_access') || authService.hasRole('Admin')">
+        <a [routerLink]="['/admin/role-master']" routerLinkActive="active">Role Assignment</a>
+    </div>
+    <div class="tabs" *ngIf="authService.hasPermission('view_suppliers') || authService.hasRole('Admin')"> <!-- Add this new div for Suppliers -->
+        <a [routerLink]="['/suppliers']" routerLinkActive="active">Suppliers</a>
+    </div>
+</div>
+
+<div *ngIf="isAuthenticated() && !(authService.hasPermission('view_material_table') || authService.hasPermission('record_consumption') || authService.hasPermission('print_barcode') || authService.hasPermission('view_reports') || authService.hasPermission('view_workspace') || authService.hasPermission('manage_rolemaster') || authService.hasPermission('admin_access') || authService.hasRole('Admin') || authService.hasPermission('view_suppliers'))">
+    <p>You have no permission to access any pages. Please contact the admin for access request.</p>
+    <div class="tabs"><a [routerLink]="['/access-request']" routerLinkActive="active">Request Access</a></div>
+</div>

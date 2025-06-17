@@ -1,0 +1,95 @@
+.auth-sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically centers the logo */
+  align-items: center;   /* Horizontally centers the logo */
+  width: 300px; /* You can adjust this width as needed */
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* Gradient background */
+  background: linear-gradient(to bottom, #872341, #6a1c36); /* Gradient from #872341 to a darker shade */
+
+  color: white; /* Default text color for any additional elements */
+}
+
+.sidebar-logo {
+  max-width: 80%;  /* Adjust to control logo size relative to sidebar width */
+  max-height: 80%; /* Prevent logo from being too tall */
+  height: auto;    /* Maintains aspect ratio */
+  display: block;
+}
+
+/* If you add navigation links or other text below the logo: */
+.sidebar-nav {
+  margin-top: 30px; /* Space between logo and navigation */
+  width: 100%;
+}
+
+.sidebar-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.sidebar-nav li a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white; /* Link color */
+  border-radius: 4px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-nav li a:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+}
+.logo {
+  max-width: 80%; /* Ensures the logo fits well and is responsive */
+  height: auto;   /* Maintains the aspect ratio of the logo */
+  display: block; /* Good practice for images to be centered */
+}
+
+.auth-sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically centers the logo */
+  align-items: center;   /* Horizontally centers the logo */
+  width: 300px; /* You can adjust this width as needed */
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}/*
+.logo {
+  // ...
+  margin-bottom: 30px; // Space below logo if other items follow
+}
+*/
+.sidebar-content {
+  text-align: center;
+}
+
+.sidebar-content h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #FFFDE7;
+}
+
+.sidebar-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 253, 231, 0.8);
+}
+
+@media (max-width: 768px) {
+  .auth-sidebar {
+    display: none;
+  }
+}
+.company-logo {
+  max-width: 200px;
+  height: auto;
+}

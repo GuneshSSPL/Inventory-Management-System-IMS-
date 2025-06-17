@@ -1,0 +1,95 @@
+<div class="supplier-list-container">
+  <h2>Suppliers</h2>
+
+  <!-- Add New Supplier Button (if you have one) -->
+  <div *ngIf="hasViewSuppliersPermission">
+    <button (click)="toggleAddSupplierForm()" class="btn btn-success mb-3">
+      {{ showAddSupplierForm ? 'Cancel Add' : 'Add New Supplier' }}
+    </button>
+  </div>
+
+  <!-- Add Supplier Form (if you have one) -->
+  <div *ngIf="showAddSupplierForm && hasViewSuppliersPermission" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Add New Supplier</h5>
+      <div class="form-group">
+        <label for="newSupplierName">Name</label>
+        <input [(ngModel)]="newSupplier.SupplierName" id="newSupplierName" class="form-control" placeholder="Supplier Name">
+      </div>
+      <div class="form-group">
+        <label for="newSupplierEmail">Email</label>
+        <input [(ngModel)]="newSupplier.Email" id="newSupplierEmail" type="email" class="form-control" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="newSupplierPhone">Phone</label>
+        <input [(ngModel)]="newSupplier.PhoneNumber" id="newSupplierPhone" class="form-control" placeholder="Phone Number">
+      </div>
+      <div class="form-group">
+        <label for="newSupplierAddress">Address</label>
+        <textarea [(ngModel)]="newSupplier.Address" id="newSupplierAddress" class="form-control" placeholder="Address"></textarea>
+      </div>
+      <button (click)="addSupplier()" class="btn btn-primary mt-2">Save Supplier</button>
+    </div>
+  </div>
+
+  <!-- Loading/Error Messages -->
+  <div *ngIf="isLoading" class="loading-message">
+    <p>Loading suppliers...</p>
+  </div>
+  <div *ngIf="errorMessage && !isLoading" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Suppliers Table -->
+  <div *ngIf="!isLoading && !errorMessage && hasViewSuppliersPermission">
+    <div *ngIf="suppliers.length > 0; else noSuppliers">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let supplier of suppliers">
+            <!-- Display Row -->
+            <tr *ngIf="!editingSupplier || editingSupplier.SupplierID !== supplier.SupplierID">
+              <td>{{ supplier.SupplierID }}</td>
+              <td>{{ supplier.SupplierName }}</td>
+              <td>{{ supplier.Email }}</td>
+              <td>{{ supplier.PhoneNumber }}</td>
+              <td>{{ supplier.Address }}</td>
+              <td>
+                <button (click)="startEdit(supplier)" class="btn btn-primary btn-sm">Edit</button>
+                <button (click)="deleteSupplier(supplier.SupplierID)" class="btn btn-danger btn-sm">Delete</button>
+              </td>
+            </tr>
+            <!-- Edit Row -->
+            <tr *ngIf="editingSupplier && editingSupplier.SupplierID === supplier.SupplierID">
+              <td>{{ editingSupplier.SupplierID }}</td>
+              <td><input [(ngModel)]="editingSupplier.SupplierName" class="form-control"></td>
+              <td><input [(ngModel)]="editingSupplier.Email" type="email" class="form-control"></td>
+              <td><input [(ngModel)]="editingSupplier.PhoneNumber" class="form-control"></td>
+              <td><textarea [(ngModel)]="editingSupplier.Address" class="form-control"></textarea></td>
+              <td>
+                <button (click)="saveEdit()" class="btn btn-success btn-sm">Save</button>
+                <button (click)="cancelEdit()" class="btn btn-secondary btn-sm">Cancel</button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noSuppliers>
+      <p>No suppliers found.</p>
+    </ng-template>
+  </div>
+
+  <div *ngIf="!hasViewSuppliersPermission && !isLoading && !errorMessage" class="permission-denied-message">
+    <p>You do not have permission to view suppliers.</p>
+  </div>
+</div>

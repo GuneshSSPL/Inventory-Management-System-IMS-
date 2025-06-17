@@ -1,0 +1,244 @@
+/* --- Header Styling --- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #2E7D32; /* Rich green color */
+  color: #FFFDE7; /* Light cream text */
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.planet {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at 30% 30%, #43A047, #1B5E20);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 253, 231, 0.3);
+}
+
+/* Navigation Styling */
+.navbar {
+  display: flex;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list li {
+  margin: 0 15px;
+}
+
+.nav-list li a {
+  color: #FFFDE7;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.nav-list li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #C8E6C9;
+}
+
+/* Dropdown Menu Styling */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  list-style: none;
+  text-align: center;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #388E3C; /* Darker green dropdown */
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  z-index: 1000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+}
+
+.dropdown-content li {
+  padding: 0;
+  width: 100%;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 12px 16px;
+  color: #FFFDE7;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+  background-color: #4CAF50;
+}
+
+/* Menu Container and Buttons */
+.menu-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+}
+
+.menu-button {
+  background: #43A047;
+  color: #FFFDE7;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.menu-button:hover {
+  background: #1B5E20;
+  transform: translateY(-1px);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  min-width: 150px;
+  z-index: 100;
+  background-color: #388E3C;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px;
+  color: #FFFDE7;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #4CAF50;
+}
+
+/* --- Dashboard Table Styling --- */
+.dashboard-container {
+  margin: 90px 20px 20px; /* margin-top to account for fixed header */
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.dashboard-table thead {
+  background-color: #2E7D32; /* Matching header green */
+  color: #FFFDE7;
+}
+
+.dashboard-table tbody tr:nth-child(even) {
+  background-color: #f0f4c3; /* Light green zebra stripe */
+}
+
+.dashboard-table tbody tr:hover {
+  background-color: #C8E6C9; /* Light green hover */
+}
+
+/* --- Responsive Styles for Mobile --- */
+@media (max-width: 768px) {
+  .burger-menu {
+      display: flex;
+  }
+  
+  .navbar {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #2E7D32;
+      padding: 10px;
+  }
+  
+  .nav-list {
+      flex-direction: column;
+      width: 100%;
+  }
+  
+  .nav-list li {
+      margin: 5px 0;
+      text-align: center;
+  }
+  
+  .nav-list a {
+      display: block;
+      padding: 10px;
+  }
+  
+  .navbar.active {
+      display: block;
+  }
+  
+  .dropdown-content {
+      position: static;
+      display: none;
+      width: 100%;
+      text-align: center;
+      box-shadow: none;
+      background-color: #388E3C;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-name {
+      font-size: 16px;
+  }
+  
+  .menu-button {
+      padding: 8px 16px;
+      font-size: 14px;
+  }
+  
+  .dashboard-table th,
+  .dashboard-table td {
+      padding: 8px;
+  }
+}

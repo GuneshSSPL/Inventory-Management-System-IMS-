@@ -1,0 +1,26 @@
+<div class="login-container">
+  <app-auth-sidebar></app-auth-sidebar>
+  <div class="login-box">
+    <div class="form-container">
+      <h2>Create Account</h2>
+      <form (ngSubmit)="signup()">
+        <input type="text" [(ngModel)]="signupData.employeeName" name="employeeName"
+               placeholder="Full Name" required>
+        <input type="email" [(ngModel)]="signupData.email" name="email"
+               placeholder="Email" required>
+        <input type="password" [(ngModel)]="signupData.password" name="password"
+               placeholder="Password" required>
+        <input type="password" [(ngModel)]="re_password" name="re_password"
+               placeholder="Confirm Password" required>
+
+        <!-- Add role/department selection if needed -->
+        <div class="button-container">
+          <button type="submit" class="btn btn-primary">Create Account</button>
+          <a  routerLink="/login" class="btn btn-link">Already have an account? Login</a>
+          <!-- <button routerLink="/login" class="btn btn-link">Already have an account? Login</button> -->
+          <!-- <button type="button" class="btn btn-link" onclick="loginredirect()" >Already have an account? Login</button> -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

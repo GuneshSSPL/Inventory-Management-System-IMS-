@@ -1,0 +1,87 @@
+.role-master-container {
+  padding: 20px;
+  margin-top: 80px;
+  font-family: Arial, sans-serif;
+  max-width: 700px;
+  margin: 40px auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group select {
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: white;
+}
+
+.assign-button-master {
+  padding: 12px 18px;
+  background-color: #28a745; /* Green for master control */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.assign-button-master:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.assign-button-master:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.loading-indicator p,
+.error-message p,
+.success-message p,
+.info-message p {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.loading-indicator p { background-color: #eef; color: #33a; }
+.error-message p { background-color: #fdd; color: #c33; }
+.success-message p { background-color: #dfd; color: #393; }
+.info-message p { background-color: #eee; color: #555; }
+
+.unauthorized-message {
+  text-align: center;
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 15px;
+  border-radius: .25rem;
+  margin-top: 20px;
+}

@@ -1,0 +1,81 @@
+.container {
+    margin-top: 60px !important; /* Use !important to ensure margin is applied */
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Loading spinner styling */
+.mat-spinner {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ffebee;
+    border-radius: 4px;
+    background-color: #ffebee;
+}
+
+/* Table styling */
+.mat-table {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-spacing: 0;
+}
+
+/* Table header styling */
+.mat-header-cell {
+    background-color: #f0f0f0;
+    padding: 12px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Table row styling */
+.mat-row {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Table cell styling */
+.mat-cell {
+    padding: 12px;
+}
+
+/* Hover effect for table rows */
+.mat-row:hover {
+    background-color: #f5f5f5;
+}
+
+/* Responsive table */
+table.mat-table {
+    display: table;
+    width: 100%;
+}
+
+/* Add elevation to table container */
+.table-container {
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 400px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.low-stock-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: 5px;
+}

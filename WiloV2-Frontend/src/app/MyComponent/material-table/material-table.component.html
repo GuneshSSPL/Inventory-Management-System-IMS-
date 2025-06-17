@@ -1,0 +1,20 @@
+<div class="container">
+  <mat-spinner *ngIf="materialService.loading"></mat-spinner>
+  
+  <div *ngIf="materialService.error" class="error-message">
+    {{ materialService.error }}
+  </div>
+
+  <table mat-table [dataSource]="materialService.dataSource" *ngIf="!materialService.loading && !materialService.error">
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element[column] }}
+        <span *ngIf="column === 'MaterialCode' && element.isLowStock" class="low-stock-dot"></span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

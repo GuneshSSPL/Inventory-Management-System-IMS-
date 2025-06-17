@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "sa",
+    "password": "sipamara",
+    "database": "WilloV2",
+    "host": "127.0.0.1",
+    "dialect": "mssql"
+  },
+  "test": {
+    "username": "sa",
+    "password": "sipamara",
+    "database": "WilloV2",
+    "host": "127.0.0.1",
+    "dialect": "mssql"
+  },
+  "production": {
+    "username": "sa",
+    "password": "sipamara",
+    "database": "WilloV2",
+    "host": "127.0.0.1",
+    "dialect": "mssql"
+  }
+}

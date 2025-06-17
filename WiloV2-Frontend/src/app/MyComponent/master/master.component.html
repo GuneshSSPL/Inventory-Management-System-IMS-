@@ -1,0 +1,54 @@
+<div class="registration-container">
+  <h2>Assign Role to User</h2>
+  
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="loading-spinner">
+    Loading...
+  </div>
+
+  <form [formGroup]="roleForm" (ngSubmit)="onSubmit()" class="registration-form">
+    
+    <!-- User Selection -->
+    <div class="form-group">
+      <label for="user">Select User:</label>
+      <select id="user" formControlName="userId">
+        <option value="">Choose User</option>
+        <option *ngFor="let user of users" [value]="user.UserID">
+          {{ user.Email }} (ID: {{ user.UserID }})
+        </option>
+      </select>
+      <div *ngIf="roleForm.get('userId')?.errors && roleForm.get('userId')?.touched" class="error">
+        User selection is required
+      </div>
+    </div>
+
+    <!-- Role Selection -->
+    <div class="form-group">
+      <label for="role">Select Role:</label>
+      <select id="role" formControlName="roleId">
+        <option value="">Choose Role</option>
+        <option *ngFor="let role of roles" [value]="role.RoleID">
+          {{ role.RoleName }}
+        </option>
+      </select>
+      <div *ngIf="roleForm.get('roleId')?.errors && roleForm.get('roleId')?.touched" class="error">
+        Role selection is required
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="roleForm.invalid || isLoading" class="submit-btn">
+      {{ isLoading ? 'Processing...' : 'Assign Role' }}
+    </button>
+  </form>
+</div>
